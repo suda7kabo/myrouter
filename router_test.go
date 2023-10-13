@@ -18,7 +18,7 @@ func TestRouter_GET(t *testing.T) {
 			}),
 		},
 		{
-			name:     "/helloのエンドポインtにハンドラを追加する",
+			name:     "/helloのエンドポイントにハンドラを追加する",
 			endpoint: "/hello",
 			handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			}),
