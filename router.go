@@ -60,3 +60,20 @@ func (r *Router) insert(method, endpoint string, handler http.Handler) {
 	}
 	currentNode.handlers[method] = handler
 }
+func (r *Router) Search(method, endpoint string) http.Handler {
+	currentNode := r.tree
+	lcpIndex := 0
+	for {
+		nextNode := currentNode.nextChild(endpoint[lcpIndex])
+		if nextNode == nil {
+			return nil
+		}
+		//
+		lcpIndex++
+		currentNode = nextNode
+		if lcpIndex == len(endpoint) {
+			break
+		}
+	}
+	return currentNode.handlers[method]
+}
