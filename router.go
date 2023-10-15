@@ -77,3 +77,13 @@ func (r *Router) Search(method, endpoint string) http.Handler {
 	}
 	return currentNode.handlers[method]
 }
+func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
+	handler := r.Search(req.Method, req.URL.Path)
+	if handler != nil {
+		handler.ServeHTTP(w, req)
+		return
+	}
+	w.WriteHeader(http.StatusNotFound)
+	w.Write([]byte("404 Not Found"))
+	return
+}
