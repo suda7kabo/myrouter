@@ -1,3 +1,3 @@
-module github/suda7kabo/myrouter
+module github.com/suda7kabo/myrouter
 
 go 1.20
